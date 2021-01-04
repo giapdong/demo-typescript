@@ -1,11 +1,12 @@
 {
   "name": "demo-typescript",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.ts",
+  "main": "index.js",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack.dev.js"
+    "build": "webpack --config webpack.config.js",
+    "dev": "node index.js"
   },
   "dependencies": {
     "ts-loader": "^8.0.13",

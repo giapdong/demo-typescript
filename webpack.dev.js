@@ -7,7 +7,7 @@ module.exports = {
   },
   mode: "development",
   entry: {
-    index: [path.join(__dirname, "abcd.js")]
+    index: [path.join(__dirname, "index.ts")]
   },
   output: {
     path: path.join(__dirname, "dist"),

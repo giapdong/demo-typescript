@@ -1,7 +1,8 @@
 const path = require("path");
-
+console.log("Build at: ", __dirname);
 module.exports = {
-  entry: "./src/index.js",
+  mode: "production",
+  entry: path.join(__dirname, "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
