@@ -4,7 +4,7 @@ module.exports = {
   target: "node",
   mode: "production",
   entry: {
-    server: [path.join(__dirname, "app.ts")]
+    server: [path.join(__dirname, "src", "app.ts")]
   },
   output: {
     path: path.join(__dirname, "build"),

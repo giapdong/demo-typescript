@@ -1,17 +1,26 @@
 {
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 12",
+
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "@root/*": ["./*"]
     },
     "outDir": "./build",
-    "noImplicitAny": true,
-    "module": "ES6",
-    "target": "ES5",
+    "lib": ["es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
+    "module": "commonjs",
+    "target": "es2019",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node"
+    "types": ["morgan", "cors", "debug", "express"]
   },
-  "exclude": ["node_modules", "build"]
+
+  "exclude": ["node_modules", "build", "webpack.*"]
 }

@@ -1,4 +1,5 @@
 // https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1
+import "module-alias/register";
 import "@babel/polyfill";
 import express from "express";
 import { Application } from "express";
@@ -6,10 +7,11 @@ import * as http from "http";
 import * as bodyparser from "body-parser";
 
 import * as winston from "winston";
+import * as morgan from "morgan";
 import * as expressWinston from "express-winston";
 import cors from "cors";
-import { CommonRoutesConfig } from "@/common/common.routes.config";
-import { UsersRoutes } from "@/users/users.routes.config";
+import { CommonRoutesConfig } from "@root/common/common.routes.config";
+import { UsersRoutes } from "@root/users/users.routes.config";
 import debug from "debug";
 
 const app: Application = express();
@@ -18,6 +20,7 @@ const port: Number = 3000;
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug("app");
 
+app.use(morgan("dev"));
 app.use(bodyparser.json());
 app.use(cors());
 
