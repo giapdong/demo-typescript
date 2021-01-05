@@ -19,7 +19,7 @@
     "allowJs": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["morgan", "cors", "debug", "express"]
+    "types": ["cors", "debug", "express"]
   },
 
   "exclude": ["node_modules", "build", "webpack.*"]

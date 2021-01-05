@@ -7,7 +7,7 @@ import * as http from "http";
 import * as bodyparser from "body-parser";
 
 import * as winston from "winston";
-import * as morgan from "morgan";
+// import * as morgan from "morgan";
 import * as expressWinston from "express-winston";
 import cors from "cors";
 import { CommonRoutesConfig } from "@root/common/common.routes.config";
@@ -20,7 +20,7 @@ const port: Number = 3000;
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug("app");
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(bodyparser.json());
 app.use(cors());
 
