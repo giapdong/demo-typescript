@@ -2,12 +2,12 @@ import { CommonRoutesConfig } from "@root/common/common.routes.config";
 import express from "express";
 
 export class UsersRoutes extends CommonRoutesConfig {
-  constructor(app: express.Application) {
-    super(app, "UsersRoutes");
+  constructor() {
+    super("UsersRoutes");
   }
 
   configureRoutes() {
-    this.app
+    this.router
       .route(`/users`)
       .get((req: express.Request, res: express.Response) => {
         res.status(200).send(`List of users`);
@@ -16,7 +16,7 @@ export class UsersRoutes extends CommonRoutesConfig {
         res.status(200).send(`Post to users`);
       });
 
-    this.app
+    this.router
       .route(`/users/:userId`)
       .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
         // this middleware function runs before any request to /users/:userId
@@ -37,6 +37,6 @@ export class UsersRoutes extends CommonRoutesConfig {
         res.status(200).send(`DELETE requested for id ${req.params.userId}`);
       });
 
-    return this.app;
+    return this.router;
   }
 }

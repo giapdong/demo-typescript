@@ -11,15 +11,11 @@ import * as bodyparser from "body-parser";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import logger from "@root/utilities/logger";
-
 import { ApiRouter } from "@root/routes";
-import { CommonRoutesConfig } from "@root/common/common.routes.config";
-import { UsersRoutes } from "@root/users/users.routes.config";
 
 const app: Application = express();
 const server: http.Server = http.createServer(app);
 const port: Number = 3000;
-const routes: Array<CommonRoutesConfig> = [];
 
 app.use(bodyparser.json());
 app.use(cors());
@@ -44,9 +40,7 @@ app.use(
   })
 );
 
-// here we are adding the UserRoutes to our array,
-// after sending the Express.js application object to have the routes added to our app!
-routes.push(new UsersRoutes(app));
+app.use(ApiRouter);
 
 // here we are configuring the expressWinston error-logging middleware,
 // which doesn't *handle* errors per se, but does *log* them
@@ -57,16 +51,6 @@ app.use(
   })
 );
 
-app.use("/api", ApiRouter);
-
-// this is a simple route to make sure everything is working properly
-app.get("/", (req: express.Request, res: express.Response) => {
-  res.status(200).send(`Server up and running!`);
-});
-
 server.listen(port, () => {
   logger.info(`Server running at http://localhost:${port}`);
-  routes.forEach((route: CommonRoutesConfig) => {
-    logger.info(`Routes configured for ${route.getName()}`);
-  });
 });
