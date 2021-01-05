@@ -19,6 +19,7 @@
     "allowJs": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
     "types": ["cors", "debug", "express"]
   },
 
