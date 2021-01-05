@@ -1,7 +1,7 @@
-import { CommonRoutesConfig } from "@root/common/common.routes.config";
+import { ARouter } from "@root/common/ARouter";
 import express from "express";
 
-export class UsersRoutes extends CommonRoutesConfig {
+export class UsersRoutes extends ARouter {
   constructor() {
     super("UsersRoutes");
   }

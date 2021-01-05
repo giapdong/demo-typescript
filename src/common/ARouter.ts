@@ -1,11 +1,13 @@
 import express from "express";
-export abstract class CommonRoutesConfig {
+
+export abstract class ARouter {
   router: express.Router;
   name: string;
 
   constructor(name: string) {
     this.router = express.Router();
     this.name = name;
+
     this.configureRoutes();
   }
 
