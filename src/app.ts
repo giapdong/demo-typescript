@@ -1,16 +1,16 @@
 // https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1
 import "module-alias/register";
 import "@babel/polyfill";
+
 import express from "express";
 import { Application } from "express";
 import cors from "cors";
 import * as http from "http";
 import * as bodyparser from "body-parser";
 
-import debug from "debug";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
-import * as ENVIROMENTS from "@root/utilities/enviroments";
+import logger from "@root/utilities/logger";
 
 import { ApiRouter } from "@root/routes";
 import { CommonRoutesConfig } from "@root/common/common.routes.config";
@@ -20,7 +20,6 @@ const app: Application = express();
 const server: http.Server = http.createServer(app);
 const port: Number = 3000;
 const routes: Array<CommonRoutesConfig> = [];
-const debugLog: debug.IDebugger = debug("app");
 
 app.use(bodyparser.json());
 app.use(cors());
@@ -62,14 +61,12 @@ app.use("/api", ApiRouter);
 
 // this is a simple route to make sure everything is working properly
 app.get("/", (req: express.Request, res: express.Response) => {
-  console.log(ENVIROMENTS.APP_ENV, ENVIROMENTS.APP_PORT, ENVIROMENTS.IS_PRODUCTION);
   res.status(200).send(`Server up and running!`);
 });
 
 server.listen(port, () => {
-  console.log("Hihi, server started!");
-  debugLog(`Server running at http://localhost:${port}`);
+  logger.info(`Server running at http://localhost:${port}`);
   routes.forEach((route: CommonRoutesConfig) => {
-    debugLog(`Routes configured for ${route.getName()}`);
+    logger.info(`Routes configured for ${route.getName()}`);
   });
 });

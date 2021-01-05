@@ -9,7 +9,6 @@
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon build/app.js",
     "serve": "node build/app.js",
-    "dev": "ts-node src/app.ts",
     "build-ts": "tsc",
     "watch-ts": "tsc -w"
   },
@@ -23,7 +22,8 @@
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.6",
     "typescript": "^4.1.3",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
