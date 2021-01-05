@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "outDir": "./build",
     "noImplicitAny": true,
     "module": "ES6",
