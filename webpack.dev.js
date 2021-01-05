@@ -10,10 +10,10 @@ module.exports = {
     index: [path.join(__dirname, "index.ts")]
   },
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "build"),
     filename: "[name].js",
     chunkFilename: "[id].chunk.js",
-    publicPath: "/dist"
+    publicPath: "/build"
   },
   module: {
     rules: [

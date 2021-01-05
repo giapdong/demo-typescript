@@ -3,3 +3,4 @@ yarn.lock
 
 # Ignore for production mode
 dist/
+build/

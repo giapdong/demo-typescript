@@ -1,15 +1,16 @@
 const path = require("path");
 
 module.exports = {
+  target: "node",
   mode: "production",
   entry: {
-    app: [path.join(__dirname, "app.ts")]
+    server: [path.join(__dirname, "app.ts")]
   },
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "build"),
     filename: "[name].js",
     chunkFilename: "[id].chunk.js",
-    publicPath: "/dist"
+    publicPath: "/build"
   },
   module: {
     rules: [
@@ -25,8 +26,10 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: "ts-loader"
+        }
       }
     ]
   },
