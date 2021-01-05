@@ -8,10 +8,11 @@ import * as http from "http";
 import * as bodyparser from "body-parser";
 
 import debug from "debug";
-// import * as morgan from "morgan";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
+import * as ENVIROMENTS from "@root/utilities/enviroments";
 
+import { ApiRouter } from "@root/routes";
 import { CommonRoutesConfig } from "@root/common/common.routes.config";
 import { UsersRoutes } from "@root/users/users.routes.config";
 
@@ -21,7 +22,6 @@ const port: Number = 3000;
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug("app");
 
-// app.use(morgan("dev"));
 app.use(bodyparser.json());
 app.use(cors());
 
@@ -58,8 +58,11 @@ app.use(
   })
 );
 
+app.use("/api", ApiRouter);
+
 // this is a simple route to make sure everything is working properly
 app.get("/", (req: express.Request, res: express.Response) => {
+  console.log(ENVIROMENTS.APP_ENV, ENVIROMENTS.APP_PORT, ENVIROMENTS.IS_PRODUCTION);
   res.status(200).send(`Server up and running!`);
 });
 
