@@ -20,7 +20,7 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
-    "types": ["cors", "debug", "express"]
+    "types": ["cors", "debug", "express", "node"]
   },
 
   "exclude": ["node_modules", "build", "webpack.*"]
