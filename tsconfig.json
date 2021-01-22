@@ -19,6 +19,8 @@
     "allowJs": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "moduleResolution": "Node",
     "types": ["cors", "debug", "express", "node"]
   },
