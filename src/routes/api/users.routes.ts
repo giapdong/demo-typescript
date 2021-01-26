@@ -1,4 +1,6 @@
 import { ARouter } from "@root/common/ARouter";
+import { ResFormatter } from "@root/utilities/response.format";
+import { getListUsers } from "@root/repository/users.repository";
 import express from "express";
 
 export class UsersRoutes extends ARouter {
@@ -10,18 +12,19 @@ export class UsersRoutes extends ARouter {
     this.router
       .route(`/users`)
       .get((req: express.Request, res: express.Response) => {
-        res.status(200).send(`List of users`);
+        let users = getListUsers();
+        let messageResponse = new ResFormatter(200, false, "Get list users", users);
+        res.json(messageResponse);
       })
       .post((req: express.Request, res: express.Response) => {
-        res.status(200).send(`Post to users`);
+        let messageResponse = new ResFormatter(200, false, "Create new user", null);
+        res.json(messageResponse);
       });
 
     this.router
       .route(`/users/:userId`)
       .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
-        // this middleware function runs before any request to /users/:userId
-        // but it doesn't accomplish anything just yet---
-        // it simply passes control to the next applicable function below using next()
+        console.log(req.url);
         next();
       })
       .get((req: express.Request, res: express.Response) => {
@@ -36,7 +39,5 @@ export class UsersRoutes extends ARouter {
       .delete((req: express.Request, res: express.Response) => {
         res.status(200).send(`DELETE requested for id ${req.params.userId}`);
       });
-
-    return this.router;
   }
 }

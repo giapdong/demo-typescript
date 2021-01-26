@@ -19,5 +19,5 @@ export abstract class ARouter {
     return this.router;
   }
 
-  abstract configureRoutes(): express.Router;
+  abstract configureRoutes(): void;
 }

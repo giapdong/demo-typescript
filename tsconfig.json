@@ -21,6 +21,7 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
+    "resolveJsonModule": true,
     "moduleResolution": "Node",
     "types": ["cors", "debug", "express", "node"]
   },

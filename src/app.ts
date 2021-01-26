@@ -12,10 +12,11 @@ import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import logger from "@root/utilities/logger";
 import { ApiRouter } from "@root/routes";
+import * as ENV from "@root/utilities/enviroments";
 
 const app: Application = express();
 const server: http.Server = http.createServer(app);
-const port: Number = 3000;
+const port: Number = ENV.APP_PORT;
 
 app.use(bodyparser.json());
 app.use(cors());
