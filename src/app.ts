@@ -53,5 +53,5 @@ app.use(
 );
 
 server.listen(port, () => {
-  logger.info(`Server running at http://localhost:${port}`);
+  logger.info(`⚡️[server]: Server is running at https://localhost:${port}`);
 });

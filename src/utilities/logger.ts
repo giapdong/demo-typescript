@@ -3,9 +3,7 @@ import * as fs from "fs";
 import DailyRotateFile from "winston-daily-rotate-file";
 import { APP_ENV, LOG_DIRECTORY } from "@root/utilities/enviroments";
 
-// create directory if it is not present
 if (!fs.existsSync(LOG_DIRECTORY)) {
-  // Create the directory if it does not exist
   fs.mkdirSync(LOG_DIRECTORY);
 }
 
@@ -32,7 +30,15 @@ export default createLogger({
   transports: [
     new transports.Console({
       stderrLevels: ["info", "error"],
-      format: format.combine(format.errors({ stack: true }), format.prettyPrint())
+      format: format.combine(
+        format.errors({ stack: true }),
+        // format.prettyPrint(),
+        format.printf(param => {
+          console.log(param);
+          let { level, message } = param;
+          return `${level}:  ${message}`;
+        })
+      )
     })
   ],
   exceptionHandlers: [new DailyRotateFile(options.file)],
