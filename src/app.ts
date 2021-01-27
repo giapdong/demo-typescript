@@ -2,8 +2,7 @@
 import "module-alias/register";
 import "@babel/polyfill";
 
-import express from "express";
-import { Application } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import * as http from "http";
 import * as bodyparser from "body-parser";
@@ -53,5 +52,5 @@ app.use(
 );
 
 server.listen(port, () => {
-  logger.info(`⚡️[server]: Server is running at https://localhost:${port}`);
+  logger.info(`⚡️ Server is running at https://localhost:${port}`);
 });

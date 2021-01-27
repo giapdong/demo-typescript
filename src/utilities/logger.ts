@@ -1,46 +1,48 @@
-import { createLogger, format, transports } from "winston";
 import * as fs from "fs";
-import DailyRotateFile from "winston-daily-rotate-file";
+import moment from "moment";
+import winston, { createLogger, format, transports } from "winston";
 import { APP_ENV, LOG_DIRECTORY } from "@root/utilities/enviroments";
 
 if (!fs.existsSync(LOG_DIRECTORY)) {
   fs.mkdirSync(LOG_DIRECTORY);
 }
 
-const logLevel = APP_ENV === "development" ? "debug" : "warn";
+const logLevel = APP_ENV === "production" ? "info" : "silly";
 
-const options = {
-  file: {
-    level: logLevel,
-    filename: LOG_DIRECTORY + "/%DATE%.log",
-    datePattern: "YYYY-MM-DD",
-    zippedArchive: true,
-    timestamp: true,
-    handleExceptions: true,
-    humanReadableUnhandledException: true,
-    prettyPrint: true,
-    json: true,
-    maxSize: "20m",
-    colorize: true,
-    maxFiles: "14d"
-  }
-};
+winston.addColors({
+  error: "bold red",
+  warn: "bold yellow",
+  info: "bold white",
+  http: "bold white",
+  verbose: "bold white",
+  debug: "bold blue",
+  silly: "bold gray"
+});
 
-export default createLogger({
+const logger: winston.Logger = createLogger({
   transports: [
     new transports.Console({
-      stderrLevels: ["info", "error"],
+      level: logLevel,
+      format: winston.format.combine(winston.format.colorize(), winston.format.simple())
+    }),
+    new transports.File({
+      level: "warn",
+      filename: `logs/${moment().format("YY")}/${moment().format("MM")}/${moment().format("DD")}.log`,
       format: format.combine(
         format.errors({ stack: true }),
-        // format.prettyPrint(),
-        format.printf(param => {
-          console.log(param);
-          let { level, message } = param;
-          return `${level}:  ${message}`;
+        format.timestamp({
+          format: "YYYY-MM-DD HH:mm:ss"
+        }),
+        format.printf(info => {
+          let levelPad = info.level.toString().padEnd(5, " ");
+          let prefix = `[${info.timestamp}] ${levelPad}`;
+          let data = `: ${info.message}`;
+          return prefix + data;
         })
       )
     })
   ],
-  exceptionHandlers: [new DailyRotateFile(options.file)],
   exitOnError: false // do not exit on handled exceptions
 });
+
+export default logger;
