@@ -1,5 +1,5 @@
 import { ARouter } from "@root/common/ARouter";
-import { ResFormatter } from "@root/utilities/response.format";
+import ResFormatter from "@root/utilities/response.format";
 import { getListUsers } from "@root/repository/users.repository";
 import express from "express";
 
