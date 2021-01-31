@@ -8,7 +8,7 @@ export abstract class ARouter {
     this.router = express.Router();
     this.name = name;
 
-    this.configureRoutes();
+    this.registerRouters();
   }
 
   getName() {
@@ -19,5 +19,5 @@ export abstract class ARouter {
     return this.router;
   }
 
-  abstract configureRoutes(): void;
+  abstract registerRouters(): void;
 }

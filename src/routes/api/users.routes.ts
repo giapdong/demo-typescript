@@ -1,41 +1,19 @@
 import { ARouter } from "@root/common/ARouter";
-import Formatter from "response-format";
-import { getListUsers } from "@root/repository/users.repository";
-import express from "express";
+import * as UserService from "@root/service/users.service";
 
 export class UsersRoutes extends ARouter {
   constructor() {
     super("UsersRoutes");
   }
 
-  configureRoutes() {
-    this.router
-      .route(`/users`)
-      .get((req: express.Request, res: express.Response) => {
-        let users = getListUsers();
-        res.json(Formatter.success("Get list users", users));
-      })
-      .post((req: express.Request, res: express.Response) => {
-        res.json(Formatter.success("Create new user", null));
-      });
+  registerRouters() {
+    this.router.route(`/users`).get(UserService.getAllUser).post(UserService.createUser);
+    this.router.route(`/users/error`).get(UserService.createTemporaryUserError);
 
     this.router
       .route(`/users/:userId`)
-      .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.log(req.url);
-        next();
-      })
-      .get((req: express.Request, res: express.Response) => {
-        res.status(200).send(`GET requested for id ${req.params.userId}`);
-      })
-      .put((req: express.Request, res: express.Response) => {
-        res.status(200).send(`PUT requested for id ${req.params.userId}`);
-      })
-      .patch((req: express.Request, res: express.Response) => {
-        res.status(200).send(`PATCH requested for id ${req.params.userId}`);
-      })
-      .delete((req: express.Request, res: express.Response) => {
-        res.status(200).send(`DELETE requested for id ${req.params.userId}`);
-      });
+      .get(UserService.getOneUser)
+      .put(UserService.updateUser)
+      .delete(UserService.deleteUser);
   }
 }
