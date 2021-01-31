@@ -21,7 +21,8 @@
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
     "response-format": "giapdong/response-format",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-slack-webhook-transport": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

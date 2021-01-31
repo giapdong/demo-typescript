@@ -14,6 +14,7 @@ import { ApiRouter } from "@root/routes";
 import * as ENV from "@root/utilities/enviroments";
 import { APIError } from "@root/bean/APIError";
 import Formatter from "response-format";
+import SlackBotError from "@root/utilities/slackBotTransportError";
 
 const app: Application = express();
 const server: http.Server = http.createServer(app);
@@ -47,6 +48,8 @@ app.use(ApiRouter);
 // here we are configuring the expressWinston error-logging middleware,
 // which doesn't *handle* errors per se, but does *log* them
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  SlackBotError.error(err.stack);
+
   if (err instanceof APIError) {
     return res.json(err.data);
   }
