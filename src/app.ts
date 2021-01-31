@@ -12,6 +12,8 @@ import * as expressWinston from "express-winston";
 import logger from "@root/utilities/logger";
 import { ApiRouter } from "@root/routes";
 import * as ENV from "@root/utilities/enviroments";
+import { APIError } from "@root/bean/APIError";
+import Formatter from "response-format";
 
 const app: Application = express();
 const server: http.Server = http.createServer(app);
@@ -44,12 +46,13 @@ app.use(ApiRouter);
 
 // here we are configuring the expressWinston error-logging middleware,
 // which doesn't *handle* errors per se, but does *log* them
-app.use(
-  expressWinston.errorLogger({
-    transports: [new winston.transports.Console()],
-    format: winston.format.combine(winston.format.colorize(), winston.format.json())
-  })
-);
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (err instanceof APIError) {
+    return res.json(err.data);
+  }
+
+  return res.json(Formatter.internalError());
+});
 
 server.listen(port, () => {
   logger.info(`⚡️ Server is running at https://localhost:${port}`);

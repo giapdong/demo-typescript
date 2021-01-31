@@ -2,6 +2,7 @@ import express from "express";
 import Formatter from "response-format";
 
 import * as UserRepository from "@root/repository/users.repository";
+import { APIError } from "@root/bean/APIError";
 
 export function getAllUser(req: express.Request, res: express.Response) {
   let users = UserRepository.getListUsers();
@@ -13,7 +14,7 @@ export function createUser(req: express.Request, res: express.Response) {
 }
 
 export function createTemporaryUserError(req: express.Request, res: express.Response) {
-  res.json(Formatter.badRequest("Error in user", null));
+  throw new APIError(Formatter.badGateway("Nothing", null));
 }
 
 export function getOneUser(req: express.Request, res: express.Response) {
