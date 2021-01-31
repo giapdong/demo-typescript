@@ -4,12 +4,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "npm run watch && npm run serve",
+    "start": "npm run build && npm run serve",
     "build": "npm run build-ts",
     "serve": "node build/app.js",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "watch-node": "nodemon build/app.js",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "build-ts": "tsc",
+    "watch-node": "nodemon build/app.js",
     "watch-ts": "tsc -w"
   },
   "dependencies": {
