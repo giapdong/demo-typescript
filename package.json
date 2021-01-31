@@ -20,6 +20,7 @@
     "express-winston": "^4.0.5",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
+    "response-format": "giapdong/response-format",
     "winston": "^3.3.3"
   },
   "devDependencies": {

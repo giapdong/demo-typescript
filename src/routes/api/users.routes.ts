@@ -1,5 +1,5 @@
 import { ARouter } from "@root/common/ARouter";
-import { ResFormatter } from "@root/utilities/response.format";
+import Formatter from "response-format";
 import { getListUsers } from "@root/repository/users.repository";
 import express from "express";
 
@@ -13,12 +13,10 @@ export class UsersRoutes extends ARouter {
       .route(`/users`)
       .get((req: express.Request, res: express.Response) => {
         let users = getListUsers();
-        let messageResponse = new ResFormatter(200, false, "Get list users", users);
-        res.json(messageResponse);
+        res.json(Formatter.success("Get list users", users));
       })
       .post((req: express.Request, res: express.Response) => {
-        let messageResponse = new ResFormatter(200, false, "Create new user", null);
-        res.json(messageResponse);
+        res.json(Formatter.success("Create new user", null));
       });
 
     this.router
